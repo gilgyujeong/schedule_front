@@ -5,10 +5,13 @@ export default function MainPresenter() {
     return (
         <S.MainBox>
             <S.MenuBox>
-                <form>
-                    <S.InputBox />
-                    메뉴
-                </form>
+                <S.InputBox>
+                    <S.InputForm>
+                        <S.PatientInput placeholder='환자명을 입력해주세요' />
+                        <S.PatientButton>검색</S.PatientButton>
+                    </S.InputForm>
+                </S.InputBox>
+                <S.AdminButton>관리자 모드</S.AdminButton>
                 
             </S.MenuBox>
             메인 페이지
