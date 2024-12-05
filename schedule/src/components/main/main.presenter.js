@@ -1,7 +1,7 @@
-import { Input } from 'antd'
-import * as S from './main.styles'
+import * as S from './main.styles';
 
-export default function MainPresenter() {
+export default function MainPresenter(props) {
+
     return (
         <S.MainBox>
             <S.MenuBox>
@@ -11,10 +11,9 @@ export default function MainPresenter() {
                         <S.PatientButton>검색</S.PatientButton>
                     </S.InputForm>
                 </S.InputBox>
-                <S.AdminButton>관리자 모드</S.AdminButton>
-                
+                <S.AdminButton onClick={props.onClickAdminButton}>관리자 모드</S.AdminButton>
             </S.MenuBox>
-            메인 페이지
+            <div ref={props.gridRef}></div>
         </S.MainBox>
     )
 }
