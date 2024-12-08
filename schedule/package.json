@@ -14,6 +14,7 @@
     "ag-grid-community": "^32.3.3",
     "ag-grid-react": "^32.3.3",
     "antd": "^5.22.3",
+    "axios": "^1.7.9",
     "gridjs": "^6.2.0",
     "next": "12.1.0",
     "react": "17.0.2",

@@ -1,7 +1,9 @@
+import PatientContainer from "../patient/patient.container";
+
 export default function AdminPresenter() {
     return (
         <>
-            관리자 페이지
+            <PatientContainer />
         </>
     )
 }
