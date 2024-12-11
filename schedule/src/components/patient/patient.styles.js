@@ -1,5 +1,5 @@
 const { default: styled } = require("@emotion/styled");
-const { Button } = require("antd");
+const { Button, Select, DatePicker } = require("antd");
 
 export const PatientBox = styled.div`
     display: flex;
@@ -50,13 +50,13 @@ export const PatientItem = styled.div`
     border: ${(props) => (props.isSelected ? "1px solid green" : "1px solid black")};
 `
 
-export const PatientModalBox = styled.div`
+export const PatientInfoBox = styled.div`
     display: flex;
     flex-direction: column;
 `
 
-export const PatientModalItem = styled.div`
-    width: 10vw;
+export const PatientInfoItem = styled.div`
+    width: 12vw;
     border: 1px solid black;
     margin: 5px;
     padding: 5px;
@@ -72,4 +72,49 @@ export const PatientButtonBox = styled.div`
 export const PatientButton = styled(Button)`
     width: 7vw;
     margin: 10px;
+`
+
+export const PatientModalBox = styled.div`
+    display: flex;
+    flex-direction: column;
+`
+
+export const PatientModalInput = styled.input`
+    width: 15vw;
+    margin: 7px;
+    padding: 5px 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    color: gray;
+    display: block;
+`
+
+export const PatientModalComboBox = styled(Select)`
+    width: 15vw;
+    margin: 7px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    display: block;
+
+    .ant-select-selector {
+        border: none !important;
+        color: gray !important;
+    }
+`
+
+export const PatientModalDate = styled(DatePicker)`
+    width: 15vw;
+    margin: 7px;
+    padding: 5px 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    color: gray;
+    display: block;
 `
