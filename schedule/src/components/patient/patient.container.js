@@ -36,12 +36,30 @@ export default function PatientContainer() {
 
     const handleCloseModal = () => {
         setIsModalOpen(false);
-        reset();
+        reset()
     }
 
     const onClickSubmit = async (data) => {
         console.log(data);
-        // const request = await axios.post("http://localhost:8080/patient/reg")
+        try {
+            const requestData = {
+                name: data.name,
+                age: data.age,
+                gender: data.gender,
+                dx: data.dx,
+                createAt: data.createAt,
+                onset: data.onset,
+                nonManner: 0,
+                physical: data.physical
+            };
+
+            const response = await axios.post("http://localhost:8080/patient/reg", requestData);
+            handleCloseModal();
+            onClickPatientInquiry();
+            alert("환자 등록에 성공했습니다.")
+        } catch {
+            alert("환자 등록에 실패했습니다.")
+        }
     }
 
 

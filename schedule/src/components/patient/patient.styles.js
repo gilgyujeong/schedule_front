@@ -36,7 +36,7 @@ export const PatientListBox = styled.div`
     display: flex;
     flex-direction: column;
     margin: 1px;
-    height: 87vh;
+    height: 82vh;
 `
 
 export const PatientItem = styled.div`
@@ -85,7 +85,7 @@ export const PatientModalInput = styled.input`
     padding: 5px 16px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    font-size: 16px;
+    font-size: 14px;
     background-color: white;
     color: gray;
     display: block;
