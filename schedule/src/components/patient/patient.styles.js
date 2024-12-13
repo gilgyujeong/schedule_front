@@ -70,7 +70,7 @@ export const PatientButtonBox = styled.div`
 `
 
 export const PatientButton = styled(Button)`
-    width: 7vw;
+    width: 20%;
     margin: 10px;
 `
 

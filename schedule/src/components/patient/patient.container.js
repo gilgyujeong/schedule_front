@@ -8,7 +8,8 @@ export default function PatientContainer() {
     const [selectedPatientId, setSelectedPatientId] = useState(null);
     const [patientSearch, setPatientSearch] = useState('');
     const [selectedPatientDetail, setSelectedPatientDetail] = useState(null);
-    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
+    const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
     const { register, handleSubmit, setValue, reset} = useForm();
 
     const onClickPatientInquiry = async () => {
@@ -30,13 +31,33 @@ export default function PatientContainer() {
         el.name.includes(patientSearch)
     );
 
-    const handleOpenModal = () => {
-        setIsModalOpen(true);
+    const handleOpenRegisterModal = () => {
+        setIsRegisterModalOpen(true);
     };
 
-    const handleCloseModal = () => {
-        setIsModalOpen(false);
-        reset()
+    const handleCloseRegisterModal = () => {
+        setIsRegisterModalOpen(false);
+        reset();
+    };
+
+    const handleOpenUpdateModal = () => {
+        if (selectedPatientId) {
+            setIsUpdateModalOpen(true);
+            setValue("name", selectedPatientDetail.name);
+            setValue("age", selectedPatientDetail.age);
+            setValue("gender", selectedPatientDetail.gender);
+            setValue("dx", selectedPatientDetail.dx);
+            setValue("onset", selectedPatientDetail.onset);
+            setValue("createAt", selectedPatientDetail.createAt);
+            setValue("physical", selectedPatientDetail.physical);
+        } else {
+            alert("수정할 환자를 선택해주세요.")
+        }
+    }
+
+    const handleCloseUpdateModal = () => {
+        setIsUpdateModalOpen(false);
+        reset();
     }
 
     const onClickSubmit = async (data) => {
@@ -54,14 +75,46 @@ export default function PatientContainer() {
             };
 
             const response = await axios.post("http://localhost:8080/patient/reg", requestData);
-            handleCloseModal();
-            onClickPatientInquiry();
+            handleCloseRegisterModal();
+            await onClickPatientInquiry();
             alert("환자 등록에 성공했습니다.")
         } catch {
             alert("환자 등록에 실패했습니다.")
         }
     }
 
+    const onclickUpdateSubmit = async (data) => {
+        try {
+            const requestData = {
+                name: data.name,
+                age: data.age,
+                gender: data.gender,
+                dx: data.dx,
+                createAt: data.createAt,
+                onset: data.onset,
+                nonManner: 0,
+                physical: data.physical
+            };
+
+            const response = await axios.put(`http://localhost:8080/patient/update/${selectedPatientId}`, requestData);
+            await onClickPatientInquiry();
+            setSelectedPatientDetail(() => ({
+                ...data,
+            }));
+
+            handleCloseUpdateModal();
+            alert("환자 수정에 성공했습니다.");
+
+        } catch {
+            alert("환자 수정에 실패했습니다.");
+        }
+    }
+
+    const onClickPatientOut = async () => {
+        const response = await axios.patch(`http://localhost:8080/patient/out/${selectedPatientId}`)
+        await onClickPatientInquiry();
+        alert("환자가 퇴원처리 되었습니다.")
+    }
 
     return (
         <PatientPresenter 
@@ -72,13 +125,18 @@ export default function PatientContainer() {
             patientSearch={patientSearch}
             handlePatientSearch={handlePatientSearch}
             selectedPatientDetail={selectedPatientDetail}
-            isModalOpen={isModalOpen}
-            handleOpenModal={handleOpenModal}
-            handleCloseModal={handleCloseModal}
+            isRegisterModalOpen={isRegisterModalOpen}
+            handleOpenRegisterModal={handleOpenRegisterModal}
+            handleCloseRegisterModal={handleCloseRegisterModal}
+            isUpdateModalOpen={isUpdateModalOpen}
+            handleOpenUpdateModal={handleOpenUpdateModal}
+            handleCloseUpdateModal={handleCloseUpdateModal}
             register={register}
             handleSubmit={handleSubmit}
             setValue={setValue}
             onClickSubmit={onClickSubmit}
+            onclickUpdateSubmit={onclickUpdateSubmit}
+            onClickPatientOut={onClickPatientOut}
         />
     )
 }

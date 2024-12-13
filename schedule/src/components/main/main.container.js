@@ -39,13 +39,23 @@ export default function MainContainer() {
     }, []);
 
     const onClickAdminButton = () => {
-        router.push("/admin")
+        router.push("/admin");
+    }
+
+    const onClickPatientButton = () => {
+        router.push("/patient");
+    }
+
+    const onClickTherapistButton = () => {
+        router.push("/therapist");
     }
 
     return (
         <MainPresenter 
-        gridRef={gridRef}
-        onClickAdminButton={onClickAdminButton}
+            gridRef={gridRef}
+            onClickAdminButton={onClickAdminButton}
+            onClickPatientButton={onClickPatientButton}
+            onClickTherapistButton={onClickTherapistButton}
         />
     )
 }
