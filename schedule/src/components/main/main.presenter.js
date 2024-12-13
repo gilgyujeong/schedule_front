@@ -11,6 +11,8 @@ export default function MainPresenter(props) {
                         <S.PatientButton>검색</S.PatientButton>
                     </S.InputForm>
                 </S.InputBox>
+                <S.AdminButton onClick={props.onClickPatientButton}>환자 관리</S.AdminButton>
+                <S.AdminButton onClick={props.onClickTherapistButton}>치료사 관리</S.AdminButton>
                 <S.AdminButton onClick={props.onClickAdminButton}>관리자 모드</S.AdminButton>
             </S.MenuBox>
             <div ref={props.gridRef}></div>
